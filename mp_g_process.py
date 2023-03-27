@@ -11,12 +11,11 @@ import datetime
 from obspy import read
 from TraceSelect import TraceSelect
 import os
-from concurrent.futures import ThreadPoolExecutor
-
+import time
 
 # 1. We need to make a date list to represent data for each day
 start = datetime.datetime.strptime("20120201", "%Y%m%d")
-end = datetime.datetime.strptime("20120210", "%Y%m%d")
+end = datetime.datetime.strptime("20131201", "%Y%m%d")
 date_generated = [
     start + datetime.timedelta(days=x) for x in range(0, (end - start).days)
 ]
@@ -71,8 +70,14 @@ def do_hvsr(station, date):
 
 
 if __name__ == "__main__":
-    stations = ["PIG1", "PIG2", "PIG3", "PIG4"]  # staions list this is foldername of your data
-    with ThreadPoolExecutor() as executor:
-        for station in stations:
-            for date in date_list:
-                executor.submit(do_hvsr, station, date)
+
+    t1 = time.perf_counter()
+    stations = ["PIG1", "PIG2", "PIG3", "PIG4"]  # staions list
+    items = [
+        (station, date) for station in stations for date in date_list
+    ]  # create a list of tuples for multiprocessing
+    with Pool() as p:
+        p.starmap(do_hvsr, items)
+    t2 = time.perf_counter()
+
+    print(f"Finished in {t2-t1} seconds")
