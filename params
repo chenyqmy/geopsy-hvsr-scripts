@@ -1,0 +1,73 @@
+# Version 0: all files generated with releases before 20170901 (default for input)
+PARAMETERS_VERSION=1
+# TYPEs:
+#   - Signal: from the start or to the end of signal (TEXT are useless)
+#   - Delta: a fixed duration counted from the start or the end (e.g. TEXT=1h).
+#   - Pick: from or to a time pick (TEXT=time pick name).
+#   - Absolute: from or to a fixed time (e.g. TEXT=20170314115338.00)
+FROM_TIME_TYPE=Signal
+FROM_TIME_TEXT=0s
+# TYPEs: Signal, Delta, Absolute
+TO_TIME_TYPE=Signal
+TO_TIME_TEXT=0s
+REFERENCE=
+COMMON_TIME_WINDOWS=true
+# TYPEs: Exactly, AtLeast, FrequencyDependent
+WINDOW_LENGTH_TYPE=Exactly
+WINDOW_MIN_LENGTH(s)=60
+WINDOW_MAX_LENGTH(s)=60
+WINDOW_MAX_COUNT=0
+# Length of time windows are adjusted to avoid a prime number of samples which
+# slows down the FFT computation. Usually a maximum prime 11 in the prime factorization
+# of the number of samples is a good compromise between the speed and the lenght inaccuracy
+# Leave as zero to allow any prime number factorization.
+WINDOW_MAXIMUM_PRIME_FACTOR=11
+BAD_SAMPLE_TOLERANCE (s)=0
+BAD_SAMPLE_GAP (s)=0
+WINDOW_OVERLAP (%)=5
+# TYPEs: NoSampleThreshold, RelativeSampleThreshold, AbsoluteSampleThreshold
+BAD_SAMPLE_THRESHOLD_TYPE=NoSampleThreshold
+ANTI-TRIGGERING_ON_RAW_SIGNAL (y/n)=y
+USED_RAW_COMPONENTS=y, y, y
+RAW_STA (s)=1
+RAW_LTA (s)=30
+RAW_MIN_SLTA=0.2
+RAW_MAX_SLTA=2.5
+ANTI-TRIGGERING_ON_FILTERED_SIGNAL (y/n)=n
+# Start a time window for each seismic event available inside the time range.
+SEISMIC_EVENT_TRIGGER (y/n)=n
+SEISMIC_EVENT_DELAY (s)=-0.1
+WINDOW_TYPE=Cosine
+WINDOW_REVERSED=n
+SMOOTHING_METHOD=Function
+SMOOTHING_WIDTH_TYPE=Log
+SMOOTHING_WIDTH=0.4
+# Describes the way values are summed: on a linear, log or inversed scale
+SMOOTHING_SCALE_TYPE=Log
+SMOOTHING_WINDOW_TYPE=KonnoOhmachi
+SMOOTHING_WINDOW_REVERSED=n
+MINIMUM_FREQUENCY=0.1
+MAXIMUM_FREQUENCY=50
+# Either 'Linear', 'Log' or 'Inversed'
+SCALE_TYPE_FREQUENCY=Log
+# Number of samples is either set to a fixed value ('Count') or through a step between samples ('Step')'
+STEP_TYPE_FREQUENCY=Count
+SAMPLES_NUMBER_FREQUENCY=256
+# STEP=difference between two successive samples for 'linear' scales
+# STEP=ratio between two successive samples for 'log' scales
+# STEP=difference between two successive inversed samples for 'inversed' scales
+STEP_FREQUENCY=1.02457
+HIGH_PASS_FREQUENCY=0
+# Possible values for HORIZONTAL_COMPONENTS: Squared, Energy, Azimuth, Geometric
+HORIZONTAL_COMPONENTS=Geometric
+# HORIZONTAL_AZIMUTH is used only when HORIZONTAL_COMPONENTS==Azimuth
+HORIZONTAL_AZIMUTH=0
+# Used only for rotated output
+ROTATION_STEP=10
+# Frequency domain window rejection (Cox et al. (2020, GJI)
+FREQUENCY_WINDOW_REJECTION_MINIMUM_FREQUENCY=0.0001
+FREQUENCY_WINDOW_REJECTION_MAXIMUM_FREQUENCY=5000
+FREQUENCY_WINDOW_REJECTION_STDDEV_FACTOR=2
+FREQUENCY_WINDOW_REJECTION_MAXIMUM_ITERATIONS=50
+#
+# END PARAMETERS
