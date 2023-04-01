@@ -26,8 +26,8 @@ def TraceSelect(st):
         for i in range(3):
             length.append(len(st.traces[i]))
             #print(length)
-            min_value = min(length)
-            min_index = length.index(min_value)
-            st.trim(st[min_index].stats.starttime, st[min_index].stats.endtime)
+        min_value = min(length)
+        min_index = length.index(min_value)
+        st.trim(st[min_index].stats.starttime, st[min_index].stats.endtime)
     
     return st
